@@ -15,8 +15,8 @@ while True:
     print("Total rolls so far:", roll_count)
 
    
-    again = input("Roll again? (y/n): ")
+    again = input("Roll again?: ")
 
-    if again.lower() != 'y':
+    if again.lower() != 'yes':
         print("Goodbye!")
         break
