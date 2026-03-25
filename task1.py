@@ -11,10 +11,10 @@ while True:
         dice = random.randint(1, 6)
         print("Dice", i+1, ":", dice)
 
-    roll_count += 1  # increase counter
+    roll_count += 1 
     print("Total rolls so far:", roll_count)
 
-    # ask to roll again
+   
     again = input("Roll again? (y/n): ")
 
     if again.lower() != 'y':
