@@ -1,22 +1,17 @@
-import random
+import random  
 
-roll_count = 0 
-while True:
+again=True 
 
-    num = int(input("How many dice do you want to roll? "))
+while again : 
 
-    print("Rolling dice...")
+    print(random.randint(1,6)) 
 
-    for i in range(num):
-        dice = random.randint(1, 6)
-        print("Dice", i+1, ":", dice)
+    another_roll=input("want to roll again?") 
 
-    roll_count += 1 
-    print("Total rolls so far:", roll_count)
+    if another_roll.lower()=="y": 
 
-   
-    again = input("Roll again?: ")
+        continue 
 
-    if again.lower() != 'yes':
-        print("Goodbye!")
-        break
+    else: 
+
+        Break 
