@@ -1,52 +1,63 @@
-import json
+def main():
+    tasks = []
 
-FILE = "tasks.json"
+    while True:
+        print("\n===== To-Do List =====")
+        print("1. Add Task")
+        print("2. Show Tasks")
+        print("3. Mark Task as Done")
+        print("4. Exit")
 
-def load():
-    try:
-        return json.load(open(FILE))
-    except:
-        return []
+        choice = input("Enter your choice: ")
 
-def save(tasks):
-    json.dump(tasks, open(FILE, "w"))
+        if choice == '1':
+            print()
+            try:
+                n_tasks = int(input("How many tasks you want to add: "))
+            except ValueError:
+                print("Please enter a valid number.")
+                continue
 
-def show(tasks):
-    if not tasks:
-        print("No tasks.")
-        return
+            for i in range(n_tasks):
+                task = input("Enter the task: ")
+                tasks.append({"task": task, "done": False})
+                print("Task added!")
 
-    print("\nYour Tasks:")
-    for i, t in enumerate(tasks):
-        status = "Done" if t["done"] else "Not Done"
-        print(f"{i+1}. {t['title']} [{status}]")
+        elif choice == '2':
+            print("\nTasks:")
+            if not tasks:
+                print("No tasks available.")
+            else:
+                for index, task in enumerate(tasks):
+                    status = "Done" if task["done"] else "Not Done"
+                    print(f"{index + 1}. {task['task']} - {status}")
 
-def mark_done(tasks):
-    show(tasks)
-    n = int(input("Task number: ")) - 1
+        elif choice == '3':
+            if not tasks:
+                print("No tasks to mark.")
+                continue
 
-    if 0 <= n < len(tasks):
-        tasks[n]["done"] = True
-        save(tasks)
-        print("Task marked as done!")
+            try:
+                task_index = int(input("Enter the task number to mark as done: ")) - 1
+            except ValueError:
+                print("Please enter a valid number.")
+                continue
 
+            if 0 <= task_index < len(tasks):
+                tasks[task_index]["done"] = True
+                print("Task marked as done!")
+            else:
+                print("Invalid task number.")
 
-tasks = load()
+        elif choice == '4':
+            print("Exiting the To-Do List.")
+            break
 
-while True:
-    print("\n1.Add  2.View  3.Mark Done  4.Exit")
-    c = input("Choose: ")
+        else:
+            print("Invalid choice. Please try again.")
 
-    if c == "1":
-        title = input("Task: ")
-        tasks.append({"title": title, "done": False})
-        save(tasks)
+    print("Thank you! Have a nice day")
 
-    elif c == "2":
-        show(tasks)
+if __name__ == "__main__":
+    main()
 
-    elif c == "3":
-        mark_done(tasks)
-
-    elif c == "4":
-        break
